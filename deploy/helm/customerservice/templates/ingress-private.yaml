@@ -1,0 +1,32 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "customer-service-helm.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+{{- $paths := .Values.ingress.private.paths }}
+{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-private
+  labels:
+    {{- include "customer-service-helm.labels" . | nindent 4 }}
+  {{- with .Values.ingress.private.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range $path := $paths }}
+          - path: {{ $path }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+          {{- end }}
+    {{- end }}
+  {{- end }}

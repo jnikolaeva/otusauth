@@ -1,0 +1,53 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+fullnameOverride: auth-service
+
+replicaCount: 1
+
+image:
+  repository: arahna/auth-service
+  pullPolicy: IfNotPresent
+  tag: v0.1
+
+migrationsimage:
+  repository: arahna/auth-service-migrations
+  pullPolicy: IfNotPresent
+  tag: v0.1
+
+service:
+  type: NodePort
+  port: 9000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: otus
+  postgresqlPassword: otuspwd
+  postgresqlDatabase: auth
+  service:
+    port: "5432"
+  metrics:
+    enabled: true
+    service:
+      type: NodePort
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9187"
+    serviceMonitor:
+      enabled: true
+      additionalLabels: {}
+      interval: 30s
+      scrapeTimeout: 10s
+    config:
+      datasourceSecret:
+        name: auth-service-secret
+        key: DB_URI
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: arch.homework
+      paths: [/api/v1/auth/signin, /api/v1/auth/signout]

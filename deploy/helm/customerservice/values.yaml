@@ -1,0 +1,64 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+fullnameOverride: customer-service
+
+replicaCount: 3
+
+image:
+  repository: arahna/customer-service
+  pullPolicy: IfNotPresent
+  tag: v0.1
+
+migrationsimage:
+  repository: arahna/customer-service-migrations
+  pullPolicy: IfNotPresent
+  tag: v0.1
+
+service:
+  type: NodePort
+  port: 9000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: otus
+  postgresqlPassword: otuspwd
+  postgresqlDatabase: customer
+  service:
+    port: "5432"
+  metrics:
+    enabled: true
+    service:
+      type: NodePort
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9187"
+    serviceMonitor:
+      enabled: true
+      additionalLabels: {}
+      interval: 30s
+      scrapeTimeout: 10s
+    config:
+      datasourceSecret:
+        name: customer-service-secret
+        key: DB_URI
+
+ingress:
+  enabled: true
+  hosts:
+    - host: arch.homework
+  public:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    paths:
+      [/api/v1/customers]
+  private:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /api/v1/customers/$1
+      nginx.ingress.kubernetes.io/auth-url: "http://auth-service.otus.svc.cluster.local:9000/api/v1/auth/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "http://$host/api/v1/auth/signin"
+      nginx.ingress.kubernetes.io/auth-response-headers: "X-Auth-User-Id"
+    paths:
+      [/api/v1/customers/(.+)]

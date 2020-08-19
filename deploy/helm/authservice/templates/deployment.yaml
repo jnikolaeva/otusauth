@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "auth-service-helm.fullname" . }}
+  labels:
+    {{- include "auth-service-helm.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "auth-service-helm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "auth-service-helm.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: APP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-service-config
+                  key: APP_PORT
+            - name: SESSION_LIFETIME
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-service-config
+                  key: SESSION_LIFETIME
+            - name: SESSION_COOKIE
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-service-config
+                  key: SESSION_COOKIE
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: auth-service-secret
+                  key: DB_URI
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5

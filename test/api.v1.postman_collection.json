@@ -1,0 +1,860 @@
+{
+	"info": {
+		"_postman_id": "c0a8a784-a566-4f33-8065-37fa76b3df2f",
+		"name": "Otus Auth v1",
+		"description": "This is demo client API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register customer 1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9e69a0eb-2dc2-4b56-812b-4c0decceaacb",
+						"exec": [
+							"pm.collectionVariables.set(\"username1\", pm.variables.replaceIn('{{$randomUserName}}'))",
+							"pm.collectionVariables.set(\"password1\", pm.variables.replaceIn('{{$randomPassword}}'))",
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"phone\", pm.variables.replaceIn('{{$randomPhoneNumber}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1937124-edae-45c5-abf4-f93f24a8b097",
+						"exec": [
+							"pm.test(\"test customer is registered\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var responseJSON = JSON.parse(responseBody)",
+							"    pm.collectionVariables.set(\"userId1\", responseJSON[\"id\"])",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{username1}}\",\n\t\"password\": \"{{password1}}\",\n\t\"firstName\": \"{{firstName}}\",\n\t\"lastName\": \"{{lastName}}\",\n\t\"email\": \"{{email}}\",\n\t\"phone\": \"{{phone}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "successful operation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"johndoe589\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71002003040\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Register customer 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "58a45982-1be7-49ac-8aa0-b75b2a28d39c",
+						"exec": [
+							"pm.collectionVariables.set(\"username2\", pm.variables.replaceIn('{{$randomUserName}}'))",
+							"pm.collectionVariables.set(\"password2\", pm.variables.replaceIn('{{$randomPassword}}'))",
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"phone\", pm.variables.replaceIn('{{$randomPhoneNumber}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3ea036a-2cdd-494d-98f5-d4213b9cf3d2",
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)",
+							"pm.collectionVariables.set(\"userId2\", responseJSON[\"id\"])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{username2}}\",\n\t\"password\": \"{{password2}}\",\n\t\"firstName\": \"{{firstName}}\",\n\t\"lastName\": \"{{lastName}}\",\n\t\"email\": \"{{email}}\",\n\t\"phone\": \"{{phone}}\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "successful operation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"johndoe589\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71002003040\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Check customer info anonymously",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50550dd5-aca7-4568-bf07-75840808eb7a",
+						"exec": [
+							"pm.test(\"test anonymous user is not allowed to check customer info\", function () {",
+							"    pm.response.to.have.status(401);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/me",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update customer info anonymously",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ed4692eb-377e-41a3-b9fe-d4370504780e",
+						"exec": [
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"phoneNumber\", pm.variables.replaceIn('{{$randomPhoneNumber}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "34e31707-4e34-4538-866e-868f7c20a75c",
+						"exec": [
+							"pm.test(\"test anonymous user cannot change customer info\", function () {",
+							"    pm.response.to.have.status(401);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"email\": \"{{email}}\",\n    \"phone\": \"{{phoneNumber}}\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers/{{userId1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"{{userId1}}"
+					]
+				},
+				"description": "Update customer info by ID supplied"
+			},
+			"response": [
+				{
+					"name": "user updated",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Julie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71004242424\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "unexpected error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Julie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71004242424\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Login customer 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77d52033-07c1-41ce-9b09-3f00ee2918ec",
+						"exec": [
+							"pm.test(\"test customer 1 is logged in\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{username1}}\",\n\t\"password\": \"{{password1}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/signin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorized customer info update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e395b846-6ae9-48f3-827b-555ca4e4248a",
+						"exec": [
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"phoneNumber\", pm.variables.replaceIn('{{$randomPhoneNumber}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e5c32af9-762e-4682-b2da-02d2be059f81",
+						"exec": [
+							"pm.test(\"test authorized user can change his customer info\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"userId1\"))",
+							"    pm.expect(jsonData.lastName).to.eql(pm.collectionVariables.get(\"lastName\"))",
+							"    pm.expect(jsonData.firstName).to.eql(pm.collectionVariables.get(\"firstName\"))",
+							"    pm.expect(jsonData.phone).to.eql(pm.collectionVariables.get(\"phoneNumber\"))",
+							"    pm.expect(jsonData.email).to.eql(pm.collectionVariables.get(\"email\"))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"email\": \"{{email}}\",\n    \"phone\": \"{{phoneNumber}}\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers/{{userId1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"{{userId1}}"
+					]
+				},
+				"description": "Update customer info by ID supplied"
+			},
+			"response": [
+				{
+					"name": "unexpected error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Julie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71004242424\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}"
+				},
+				{
+					"name": "user updated",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Julie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71004242424\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Authorized customer info check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5678d793-0054-44ad-98df-67148e82bc4c",
+						"exec": [
+							"pm.test(\"test authorized user can check his customer info\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"userId1\"))",
+							"    pm.expect(jsonData.lastName).to.eql(pm.collectionVariables.get(\"lastName\"))",
+							"    pm.expect(jsonData.firstName).to.eql(pm.collectionVariables.get(\"firstName\"))",
+							"    pm.expect(jsonData.phone).to.eql(pm.collectionVariables.get(\"phoneNumber\"))",
+							"    pm.expect(jsonData.email).to.eql(pm.collectionVariables.get(\"email\"))    ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/me",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout customer 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ca0b9647-2938-49c4-85ea-110410ca6dc9",
+						"exec": [
+							"pm.test(\"test customer is logged in\", function () {",
+							"    pm.response.to.have.status(204);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/auth/signout",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login customer 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ad799b5-654a-4400-bb93-3059ad29748f",
+						"exec": [
+							"pm.test(\"test customer 2 is logged in\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{username2}}\",\n\t\"password\": \"{{password2}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/signin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get another customer info by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62113f95-a4e2-4a72-9dd9-fbae7a3a78cf",
+						"exec": [
+							"pm.test(\"test authenticated user cannot read another customer info\", function () {",
+							"    pm.response.to.have.status(403);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/{{userId1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticated customer info update by another user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c3266658-891f-43dc-ae18-5487da8edc5b",
+						"exec": [
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"phoneNumber\", pm.variables.replaceIn('{{$randomPhoneNumber}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d5baeae-a3f4-4647-afaf-aa82744fb41d",
+						"exec": [
+							"pm.test(\"test authenticated user cannot change another customer info\", function () {",
+							"    pm.response.to.have.status(403);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"email\": \"{{email}}\",\n    \"phone\": \"{{phoneNumber}}\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers/{{userId1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"{{userId1}}"
+					]
+				},
+				"description": "Update customer info by ID supplied"
+			},
+			"response": [
+				{
+					"name": "user updated",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Julie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71004242424\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "unexpected error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Julie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"bestjohn@doe.com\",\n    \"phone\": \"+71004242424\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4450a38a-19ce-464c-ae39-69d2a25eea16",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6642de09-0778-4919-a070-1e71d46a86cf",
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"[INFO] Request: \" + (('data' in request) ? request['data'] : '')] = true;",
+					"tests[\"[INFO] Response: \" + responseBody] = true;"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f6d24456-d045-47f7-bc7f-97e6092824b3",
+			"key": "baseUrl",
+			"value": "http://arch.homework/api/v1"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

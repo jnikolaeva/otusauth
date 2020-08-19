@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="abcf2a29-7d7c-4f68-b2ea-f19831dab746" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" path="/snap/go/6123" />
+  <component name="ProjectId" id="1fx58LNec1Quyoc7ukhqchnT58Z" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/deploy/helm/customerservice/templates" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/api" />
+      <recent name="$PROJECT_DIR$/deploy/helm" />
+      <recent name="$PROJECT_DIR$/deploy" />
+      <recent name="$PROJECT_DIR$/helm" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/deploy/helm/customerservice/templates" />
+      <recent name="$PROJECT_DIR$/deploy/helm/authservice/templates" />
+      <recent name="$PROJECT_DIR$/deploy/helm/monitoring" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="591" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597820677084">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="591" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1597820677084" />
+    <state x="670" y="355" width="642" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597326854433">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="670" y="355" width="642" height="403" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1848.1053@72.27.1848.1053" timestamp="1597326854433" />
+    <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1597152991838">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1597152991838" />
+    <state width="1240" height="275" key="GridCell.Tab.0.bottom" timestamp="1597859168384">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1240" height="275" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1597859168384" />
+    <state width="1240" height="275" key="GridCell.Tab.0.center" timestamp="1597859168384">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1240" height="275" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1597859168384" />
+    <state width="1240" height="275" key="GridCell.Tab.0.left" timestamp="1597859168383">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1240" height="275" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1597859168383" />
+    <state width="1240" height="275" key="GridCell.Tab.0.right" timestamp="1597859168384">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1240" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1597859168384" />
+    <state x="686" y="263" width="620" height="580" key="find.popup" timestamp="1597308002521">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="686" y="263" width="620" height="580" key="find.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1597308002521" />
+  </component>
+</project>

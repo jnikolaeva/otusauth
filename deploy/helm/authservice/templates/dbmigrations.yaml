@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: auth-service-migrations
+  labels:
+  {{- include "auth-service-helm.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: {{ .Chart.Name }}
+      labels:
+        {{- include "auth-service-helm.selectorLabels" . | nindent 8 }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version}}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: check-db-ready
+          image: postgres:12.2
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: auth-service-secret
+                  key: DB_URI
+          command:
+            - sh
+            - "-c"
+            - |
+              until pg_isready -d $DB_URI;
+              do echo waiting for database; sleep 2; done;
+      containers:
+        - name: dbmigrations
+          env:
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: auth-service-secret
+                  key: DB_URI
+          image: "{{ .Values.migrationsimage.repository }}:{{ .Values.migrationsimage.tag }}"
+          imagePullPolicy: {{ .Values.migrationsimage.pullPolicy }}
+          command:
+            - sh
+            - "-c"
+            - |
+              migrate -database $DB_URI -source file://migrations up
+  backoffLimit: 6
