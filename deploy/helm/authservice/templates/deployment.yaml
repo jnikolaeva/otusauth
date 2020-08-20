@@ -47,6 +47,16 @@ spec:
                 secretKeyRef:
                   name: auth-service-secret
                   key: DB_URI
+            - name: REDIS_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-service-config
+                  key: REDIS_ADDR
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-service-secret
+                  key: REDIS_PASSWORD
           livenessProbe:
             httpGet:
               path: /live
