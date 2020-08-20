@@ -1,0 +1,20 @@
+{{- if .Values.metrics.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "auth-service-helm.fullname" . }}
+  labels:
+  {{- include "auth-service-helm.labels" . | nindent 4 }}
+spec:
+  jobLabel: {{ include "auth-service-helm.fullname" . }}
+  namespaceSelector:
+    matchNames:
+      - "{{ $.Release.Namespace }}"
+  selector:
+    matchLabels:
+  {{- include "auth-service-helm.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - interval: 15s
+      port: http
+      path: /metrics
+  {{- end }}

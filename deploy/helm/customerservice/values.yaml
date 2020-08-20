@@ -62,3 +62,7 @@ ingress:
       nginx.ingress.kubernetes.io/auth-response-headers: "X-Auth-User-Id"
     paths:
       [/api/v1/customers/(.+)]
+
+metrics:
+  serviceMonitor:
+    enabled: true
